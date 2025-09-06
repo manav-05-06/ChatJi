@@ -44,11 +44,11 @@ const Main = () => {
                 </div></>
                 : <div className="result">
                     <div className="result-title">
-                        <img src={assets.tom} alt="" />
+                        <img src={assets.compass_icon} alt="" />
                         <p>{recentPrompts}</p>
                     </div>
                     <div className="result-data">
-                        <img src={assets.jerry} alt="" />
+                        <img src={assets.code_icon} alt="" />
                         
                         {loading ? (
   <div className="loader">
