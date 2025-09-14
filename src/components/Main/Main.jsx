@@ -25,7 +25,7 @@ const Main = () => {
                 {!showResults?<>
                 <div className="main-content">
                     
-                    <p>Welcome to Chatly;</p>
+                    <p>Welcome to ChatJi;</p>
                     <p>Ask me anything...</p>
                 </div>
                 <div className="cards">
