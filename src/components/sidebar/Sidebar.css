@@ -1,0 +1,238 @@
+/* ============================
+   BASE SIDEBAR
+============================ */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: -260px; /* hidden by default on all screens */
+  width: 240px;
+  height: 100vh;
+  background: blanchedalmond;
+  padding: 20px 15px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+
+  z-index: 200;
+  transition: all 0.35s ease-in-out;
+
+  overflow-y: auto;
+}
+
+/* Slide-in for mobile */
+.sidebar.mobile-open {
+  left: 0;
+}
+
+/* Desktop expanded mode */
+.sidebar.expanded {
+  left: 0;
+  width: 240px;
+}
+
+/* Desktop collapsed mode */
+.sidebar.collapsed {
+  left: 0;
+  width: 80px;
+}
+
+/* Hide text in collapsed mode */
+.sidebar.collapsed p {
+  display: none;
+}
+
+/* Scrollbar hidden */
+.sidebar::-webkit-scrollbar {
+  width: 0;
+}
+
+
+
+/* ============================
+   ICON STYLING
+============================ */
+.sidebar img {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+  flex-shrink: 0;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.sidebar img:hover {
+  transform: scale(1.12);
+  opacity: 0.85;
+}
+
+/* Menu icon bigger */
+.menu {
+  width: 34px !important;
+  height: 34px !important;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+
+
+/* ============================
+   NEW CHAT BUTTON
+============================ */
+.new-chat {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  background: rgba(0, 0, 0, 0.18);
+  padding: 12px 15px;
+  border-radius: 50px;
+
+  width: fit-content;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.new-chat img {
+  width: 28px;
+  height: 28px;
+}
+
+.new-chat:hover {
+  background: rgba(0, 0, 0, 0.28);
+}
+
+
+
+/* ============================
+   RECENT SECTION
+============================ */
+.recent {
+  display: flex;
+  flex-direction: column;
+  animation: fadeIn 0.4s ease;
+}
+
+.title {
+  font-size: 17px;
+  font-weight: 600;
+  margin-top: 25px;
+  margin-bottom: 12px;
+}
+
+.recent-entry {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  padding: 12px;
+  border-radius: 12px;
+
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.recent-entry img {
+  width: 24px;
+  height: 24px;
+}
+
+.recent-entry:hover {
+  background: rgba(0, 0, 0, 0.12);
+}
+
+.recent-entry p {
+  font-size: 14px;
+}
+
+.no-history {
+  font-size: 14px;
+  padding: 10px;
+  color: #777;
+}
+
+
+
+/* ============================
+   BOTTOM SECTION
+============================ */
+.bottom {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.bottom-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  padding: 12px;
+  border-radius: 12px;
+
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.bottom-item img {
+  width: 26px;
+  height: 26px;
+}
+
+.bottom-item:hover {
+  background: rgba(0, 0, 0, 0.12);
+}
+
+
+
+/* ============================
+   COLLAPSED MODE ADJUSTMENTS
+============================ */
+.sidebar.collapsed .recent-entry,
+.sidebar.collapsed .bottom-item,
+.sidebar.collapsed .new-chat {
+  justify-content: center;
+}
+
+.sidebar.collapsed .recent-entry img,
+.sidebar.collapsed .bottom-item img,
+.sidebar.collapsed .new-chat img {
+  width: 30px;
+  height: 30px;
+}
+
+
+
+/* ============================
+   ANIMATIONS
+============================ */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(5px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+
+
+/* ============================
+   MOBILE ONLY
+============================ */
+@media (max-width: 768px) {
+  .sidebar.expanded,
+  .sidebar.collapsed {
+    width: 240px; /* always full width on mobile */
+  }
+
+  .sidebar.collapsed p {
+    display: block; /* text always visible on mobile */
+  }
+
+  .sidebar {
+    left: -260px; /* always hidden by default */
+  }
+
+  .sidebar.mobile-open {
+    left: 0;
+  }
+}
