@@ -4,15 +4,33 @@ import { assets } from "../../assets/assets";
 import { Context } from "../../Context/Context";
 
 const Sidebar = () => {
-  const { onSent, prevPrompts, setRecentPrompts, newChat } = useContext(Context);
+  const { onSent, prevPrompts, setRecentPrompts, newChat } =
+    useContext(Context);
 
-  const [isOpen, setIsOpen] = useState(true); // desktop collapse mode
+  const [isOpen, setIsOpen] = useState(true); // Desktop expanded mode
   const [isMobileVisible, setIsMobileVisible] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
-  // Detect mobile screen
-  const isMobile = window.innerWidth <= 768;
+  /* ============================
+     HANDLE SCREEN RESIZE
+  ============================ */
+  useEffect(() => {
+    const handleResize = () => {
+      const mobile = window.innerWidth <= 768;
+      setIsMobile(mobile);
 
-  // Toggle sidebar depending on device
+      // Auto close on mobile resize
+      if (mobile) setIsOpen(true);
+      if (!mobile) setIsMobileVisible(false);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  /* ============================
+     SIDEBAR TOGGLE
+  ============================ */
   const toggleSidebar = () => {
     if (isMobile) {
       setIsMobileVisible((prev) => !prev);
@@ -21,30 +39,37 @@ const Sidebar = () => {
     }
   };
 
+  /* ============================
+     LOAD OLD PROMPT
+  ============================ */
   const loadPrompt = async (prompt) => {
     setRecentPrompts(prompt);
     await onSent(prompt);
 
+    // Close sidebar on mobile so UI is clean
     if (isMobile) setIsMobileVisible(false);
   };
 
+  /* ============================
+     RENDER
+  ============================ */
   return (
     <div
       className={`sidebar 
-      ${isOpen ? "expanded" : "collapsed"} 
-      ${isMobileVisible ? "mobile-open" : ""}`}
+        ${isOpen ? "expanded" : "collapsed"} 
+        ${isMobileVisible ? "mobile-open" : ""}
+      `}
     >
       <div className="top">
-
-        {/* Menu button */}
+        {/* Menu Button */}
         <img
           className="menu"
           src={assets.menu_icon}
-          alt="menu"
+          alt="Toggle Menu"
           onClick={toggleSidebar}
         />
 
-        {/* New Chat */}
+        {/* New Chat Button */}
         <div
           className="new-chat"
           onClick={() => {
@@ -52,14 +77,14 @@ const Sidebar = () => {
             if (isMobile) setIsMobileVisible(false);
           }}
         >
-          <img src={assets.plus_icon} alt="plus" />
-          {isOpen && <p>New Chat</p>}
+          <img src={assets.plus_icon} alt="New Chat" />
+          {isOpen && <p className="label">New Chat</p>}
         </div>
         <br></br>
 
-        <hr />
+        <hr className="divider" />
 
-        {/* Recent */}
+        {/* Recent Chats */}
         {isOpen && (
           <div className="recent">
             <p className="title">Recent Chats</p>
@@ -71,8 +96,8 @@ const Sidebar = () => {
                   key={index}
                   onClick={() => loadPrompt(item)}
                 >
-                  <img src={assets.message_icon} alt="msg" />
-                  <p>{item.slice(0, 20)}...</p>
+                  <img src={assets.message_icon} alt="Chat" />
+                  <p>{item.slice(0, 22)}...</p>
                 </div>
               ))
             ) : (
@@ -82,21 +107,21 @@ const Sidebar = () => {
         )}
       </div>
 
-      {/* Bottom Buttons */}
+      {/* Bottom Section */}
       <div className="bottom">
         <div className="bottom-item">
-          <img src={assets.question_icon} alt="help" />
-          {isOpen && <p>Help</p>}
+          <img src={assets.question_icon} alt="Help" />
+          {isOpen && <p className="label">Help</p>}
         </div>
 
         <div className="bottom-item">
-          <img src={assets.history_icon} alt="history" />
-          {isOpen && <p>History</p>}
+          <img src={assets.history_icon} alt="History" />
+          {isOpen && <p className="label">History</p>}
         </div>
 
         <div className="bottom-item">
-          <img src={assets.setting_icon} alt="settings" />
-          {isOpen && <p>Settings</p>}
+          <img src={assets.setting_icon} alt="Settings" />
+          {isOpen && <p className="label">Settings</p>}
         </div>
       </div>
     </div>

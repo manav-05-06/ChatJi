@@ -4,10 +4,13 @@
 .main {
   flex: 1;
   min-height: 100vh;
-  padding-left: 260px; /* space when sidebar expanded */
-  padding-bottom: 18vh;
+  padding-left: 260px;          /* space when sidebar expanded */
+  padding-bottom: 18vh;         /* space for search bar */
   position: relative;
   transition: padding-left 0.35s ease;
+  background: #F0E7D5;          /* Vanilla Cream base */
+  color: #212842;               /* Midnight Indigo text */
+  box-sizing: border-box;
 }
 
 /* Collapsed Sidebar → adjust main padding */
@@ -30,34 +33,47 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 18px 22px;
-  margin-bottom: 10px;
+
+  padding: 14px 24px;
+  margin-bottom: 8px;
 
   position: sticky;
   top: 0;
-  background: white;
-  z-index: 50;
+  z-index: 60;
 
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  background: #F0E7D5;
+  border-bottom: 1px solid rgba(33, 40, 66, 0.12);
+  box-shadow: 0 1px 4px rgba(33, 40, 66, 0.10);
 }
 
+/* Brand pill */
 .nav p {
-  background: blanchedalmond;
-  padding: 10px 18px;
-  border-radius: 50px;
+  background: #212842;
+  color: #F0E7D5;
+  padding: 8px 18px;
+  border-radius: 999px;
+
   font-weight: 600;
-  font-size: 20px;
+  font-size: 18px;
+  letter-spacing: 0.3px;
 }
 
+/* Avatar / profile image */
 .nav img {
-  width: 42px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   cursor: pointer;
-  transition: 0.2s;
+
+  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+  opacity: 0.9;
 }
 
 .nav img:hover {
-  transform: scale(1.1);
+  transform: scale(1.06);
+  opacity: 1;
+  box-shadow: 0 4px 10px rgba(33, 40, 66, 0.25);
 }
 
 
@@ -65,9 +81,9 @@
    MAIN CONTAINER
 ============================ */
 .main-container {
-  max-width: 900px;
-  margin: auto;
-  padding: 0 20px 80px 20px;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 12px 24px 80px 24px;
 }
 
 
@@ -75,14 +91,16 @@
    WELCOME SECTION
 ============================ */
 .main-content {
-  margin: 50px 0;
-  font-size: 50px;
+  margin: 70px 0 48px;
+  font-size: 46px;
   font-weight: 700;
-  line-height: 1.1;
+  line-height: 1.15;
+  color: #212842;
+  text-align: center;
 }
 
 .main-content p {
-  background: linear-gradient(45deg, #e05a5a, #ff6a00, #ffd200);
+  background: linear-gradient(90deg, #212842, #3a4161);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -93,43 +111,55 @@
 ============================ */
 .cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 35px;
-  margin-bottom: 45px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 28px;
+  margin-bottom: 52px;
 }
 
 .card {
-  background: #ffe3b1;
-  padding: 18px;
-  min-height: 160px;
+  position: relative;
+  background: #f7efe0;
+  padding: 20px 20px 24px;
+  min-height: 170px;
 
   border-radius: 18px;
   cursor: pointer;
-  transition: 0.25s ease;
 
-  box-shadow: 0 4px 8px rgba(0,0,0,0.10);
-  position: relative;
+  border: 1px solid rgba(33, 40, 66, 0.10);
+  box-shadow: 0 6px 16px rgba(33, 40, 66, 0.16);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease,
+    border-color 0.25s ease;
 }
 
 .card:hover {
-  background: #ffd592;
-  transform: translateY(-5px);
+  background: #ece1cd;
+  transform: translateY(-6px);
+  box-shadow: 0 10px 24px rgba(33, 40, 66, 0.26);
+  border-color: rgba(33, 40, 66, 0.20);
 }
 
 .card p {
-  font-size: 17px;
-  color: #333;
-  line-height: 1.3;
+  font-size: 16px;
+  color: #212842;
+  line-height: 1.45;
 }
 
+/* Card icon */
 .card img {
-  width: 42px;
+  width: 40px;
+  height: 40px;
   position: absolute;
-  right: 12px;
-  bottom: 12px;
-  padding: 6px;
-  border-radius: 50%;
-  background: white;
+  right: 14px;
+  bottom: 14px;
+
+  padding: 8px;
+  border-radius: 999px;
+  background: #212842;
+  box-shadow: 0 4px 10px rgba(33, 40, 66, 0.35);
 }
 
 
@@ -148,7 +178,7 @@
 }
 
 .result::-webkit-scrollbar-thumb {
-  background: #ccc;
+  background: rgba(33, 40, 66, 0.35);
   border-radius: 10px;
 }
 
@@ -156,11 +186,12 @@
   display: flex;
   align-items: center;
   gap: 14px;
-  margin: 35px 0;
+  margin: 34px 0 20px;
 }
 
 .result-title img {
   width: 45px;
+  height: 45px;
   border-radius: 50%;
 }
 
@@ -173,13 +204,14 @@
 
 .result-data img {
   width: 42px;
+  height: 42px;
   border-radius: 10px;
 }
 
 .response-text {
   font-size: 17px;
-  color: #444;
-  line-height: 1.6;
+  color: #212842;
+  line-height: 1.65;
   white-space: pre-wrap;
 }
 
@@ -199,14 +231,14 @@
   border: none;
   border-radius: 5px;
 
-  background: linear-gradient(90deg, #e05a5a, #ff6a00, #ffd200);
+  background: linear-gradient(90deg, #212842, #3a4161, #212842);
   background-size: 300px 100%;
   animation: animateLoader 1.5s infinite linear;
 }
 
 @keyframes animateLoader {
-  0% { background-position: -300px 0; }
-  100% { background-position: 300px 0; }
+  0%   { background-position: -300px 0; }
+  100% { background-position:  300px 0; }
 }
 
 
@@ -219,14 +251,17 @@
   left: 260px;
   right: 0;
 
-  background: white;
-  padding: 15px 20px;
+  background: #F0E7D5;
+  padding: 16px 24px 18px;
 
-  box-shadow: 0 -3px 12px rgba(0,0,0,0.12);
+  box-shadow: 0 -3px 12px rgba(33, 40, 66, 0.18);
+  border-top: 1px solid rgba(33, 40, 66, 0.12);
 
   transition: left 0.35s ease;
+  z-index: 55;
 }
 
+/* When sidebar collapses */
 .sidebar.collapsed ~ .main .main-bottom {
   left: 90px;
 }
@@ -240,12 +275,14 @@
 .search {
   display: flex;
   align-items: center;
-  background: #f2f2f2;
-  padding: 12px 20px;
-  border-radius: 50px;
   gap: 18px;
 
-  box-shadow: inset 0 2px 3px rgba(0,0,0,0.08);
+  background: rgba(33, 40, 66, 0.06);
+  padding: 12px 20px;
+  border-radius: 999px;
+
+  border: 1px solid rgba(33, 40, 66, 0.15);
+  box-shadow: inset 0 2px 3px rgba(33, 40, 66, 0.08);
 }
 
 .search input {
@@ -253,7 +290,13 @@
   background: transparent;
   border: none;
   outline: none;
+
   font-size: 18px;
+  color: #212842;
+}
+
+.search input::placeholder {
+  color: rgba(33, 40, 66, 0.55);
 }
 
 .search-icons {
@@ -264,16 +307,20 @@
 
 .search img {
   width: 26px;
+  height: 26px;
   cursor: pointer;
-  transition: 0.25s ease;
+
+  transition: transform 0.25s ease, opacity 0.25s ease;
+  opacity: 0.85;
 }
 
 .search img:hover {
   transform: scale(1.12);
+  opacity: 1;
 }
 
 .send-btn {
-  filter: brightness(1.15);
+  filter: brightness(1.05);
 }
 
 
@@ -282,9 +329,9 @@
 ============================ */
 .Footer {
   font-size: 13px;
-  margin-top: 10px;
+  margin-top: 12px;
   text-align: center;
-  color: #777;
+  color: rgba(33, 40, 66, 0.6);
 }
 
 
@@ -293,7 +340,12 @@
 ============================ */
 @media (max-width: 600px) {
   .main-content {
-    font-size: 38px;
+    margin: 60px 0 36px;
+    font-size: 34px;
+  }
+
+  .main-container {
+    padding: 8px 16px 80px 16px;
   }
 
   .search {
@@ -306,5 +358,6 @@
 
   .search img {
     width: 22px;
+    height: 22px;
   }
 }
