@@ -30,27 +30,35 @@ const ContextProvider = (props) => {
       return;
     }
 
-    // Clean response formatting
+    // Advanced cleaning response logic for better formatting
     let cleaned = response
-      .replace(/\*\*(.*?)\*\*/g, "<b>$1</b>") // bold
-      .replace(/\n/g, "<br>")                // new lines
-      .replace(/\* (.+)/g, "• $1");          // bullet points
+      .replace(/```([\s\S]*?)```/g, '<pre><code>$1</code></pre>') // code blocks
+      .replace(/`([^`]+)`/g, '<code>$1</code>')                    // inline code
+      .replace(/\*\*(.*?)\*\*/g, "<b>$1</b>")                     // bold text
+      .replace(/\n\n/g, "<br><br>")                               // double new lines
+      .replace(/\n/g, "<br>")                                     // single new lines
+      .replace(/^\* (.+)/gm, "<li>$1</li>")                      // bullet points
+      .replace(/(<li>.*<\/li>)/s, "<ul>$1</ul>");                 // wrap <li> in <ul>
 
     setLoading(false);
 
-    // Word-by-word streaming
+    // Smooth Word-by-Word Streaming
     const words = cleaned.split(" ");
     let index = 0;
 
     const stream = setInterval(() => {
-      if (index < words.length) {
-        setResultData((prev) => prev + words[index] + " ");
-        index++;
-      } else {
-        clearInterval(stream);
-        setRegenerating(false);
-      }
-    }, 25);
+      setResultData((prev) => {
+        if (index < words.length) {
+          const nextWord = words[index] + " ";
+          index++;
+          return prev + nextWord;
+        } else {
+          clearInterval(stream);
+          setRegenerating(false);
+          return prev;
+        }
+      });
+    }, 20);
   };
 
   const newChat = () => {

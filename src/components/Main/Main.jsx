@@ -157,7 +157,7 @@ const Main = () => {
           </div>
 
           <div className="Footer">
-            <p>{time.toLocaleTimeString()} • Made by Manav</p>
+            <p>{time.toLocaleTimeString()} • Made by Yash </p>
           </div>
         </div>
       </div>

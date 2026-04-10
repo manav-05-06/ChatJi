@@ -102,6 +102,7 @@
 .main-content p {
   background: linear-gradient(90deg, #212842, #3a4161);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
@@ -213,6 +214,49 @@
   color: #212842;
   line-height: 1.65;
   white-space: pre-wrap;
+}
+
+/* ============================
+   RESPONSE FORMATTING
+============================ */
+.response-text b {
+  color: #1a1f33;
+  font-weight: 700;
+}
+
+.response-text pre {
+  background: #282c34;
+  color: #abb2bf;
+  padding: 16px;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin: 12px 0;
+  font-family: 'Fira Code', 'Courier New', monospace;
+  font-size: 14px;
+}
+
+.response-text code {
+  background: rgba(33, 40, 66, 0.08);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: monospace;
+  font-size: 0.9em;
+}
+
+.response-text pre code {
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+  font-size: inherit;
+}
+
+.response-text ul {
+  margin: 10px 0 10px 20px;
+  list-style-type: disc;
+}
+
+.response-text li {
+  margin-bottom: 6px;
 }
 
 

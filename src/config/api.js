@@ -21,12 +21,18 @@ async function runChat(prompt) {
       }
     );
 
-    const data = await response.json();
+    if (!response.ok) {
+      if (response.status === 429) {
+        return "⚠️ API Quota Exceeded: Your free tier limit has been reached. Please wait a moment or check your Google AI Studio quota.";
+      }
+      return `⚠️ API Error (${response.status}): Unable to get response from AI.`;
+    }
 
+    const data = await response.json();
     return data.candidates?.[0]?.content?.parts?.[0]?.text || "No reply";
   } catch (error) {
     console.error("Gemini API Error:", error);
-    return "⚠️ Error retrieving response.";
+    return "⚠️ Connection Error: Unable to reach the AI service. Please check your internet or API key.";
   }
 }
 
